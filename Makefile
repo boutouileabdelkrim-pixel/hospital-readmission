@@ -1,6 +1,6 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean-data features clean all
+.PHONY: help sync lint format test data validate clean-data features train-baseline clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
@@ -8,16 +8,17 @@ RUFF   := uv run ruff
 
 help:
 > @echo "Hospital Readmission — available targets:"
-> @echo "  sync        Install dependencies (uv sync --all-groups)"
-> @echo "  lint        Run ruff check + format --check"
-> @echo "  format      Auto-format (writes) + auto-fix lint"
-> @echo "  test        Run pytest"
-> @echo "  data        Download raw dataset (UCI, fallback Kaggle)"
-> @echo "  validate    Validate raw dataset schema"
-> @echo "  clean-data  Build data/processed/clean.parquet"
-> @echo "  features    Build data/features/{train,val,test}.parquet"
-> @echo "  clean       Remove caches and build artifacts"
-> @echo "  all         lint + test"
+> @echo "  sync            Install dependencies (uv sync --all-groups)"
+> @echo "  lint            Run ruff check + format --check"
+> @echo "  format          Auto-format (writes) + auto-fix lint"
+> @echo "  test            Run pytest"
+> @echo "  data            Download raw dataset (UCI, fallback Kaggle)"
+> @echo "  validate        Validate raw dataset schema"
+> @echo "  clean-data      Build data/processed/clean.parquet"
+> @echo "  features        Build data/features/{train,val,test}.parquet"
+> @echo "  train-baseline  Train XGBoost + LightGBM baselines"
+> @echo "  clean           Remove caches and build artifacts"
+> @echo "  all             lint + test"
 
 sync:
 > uv sync --all-groups
@@ -44,6 +45,9 @@ clean-data:
 
 features:
 > $(PYTHON) -m src.features.clinical
+
+train-baseline:
+> $(PYTHON) -m src.models.train_baseline
 
 clean:
 > rm -rf .pytest_cache .ruff_cache .coverage htmlcov
