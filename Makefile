@@ -1,6 +1,6 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean all
+.PHONY: help sync lint format test data validate clean-data clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
@@ -8,14 +8,15 @@ RUFF   := uv run ruff
 
 help:
 > @echo "Hospital Readmission — available targets:"
-> @echo "  sync      Install dependencies (uv sync --all-groups)"
-> @echo "  lint      Run ruff check + format --check"
-> @echo "  format    Auto-format (writes) + auto-fix lint"
-> @echo "  test      Run pytest"
-> @echo "  data      Download raw dataset from UCI"
-> @echo "  validate  Validate raw dataset schema"
-> @echo "  clean     Remove caches and build artifacts"
-> @echo "  all       lint + test"
+> @echo "  sync        Install dependencies (uv sync --all-groups)"
+> @echo "  lint        Run ruff check + format --check"
+> @echo "  format      Auto-format (writes) + auto-fix lint"
+> @echo "  test        Run pytest"
+> @echo "  data        Download raw dataset (UCI, fallback Kaggle)"
+> @echo "  validate    Validate raw dataset schema"
+> @echo "  clean-data  Build data/processed/clean.parquet"
+> @echo "  clean       Remove caches and build artifacts"
+> @echo "  all         lint + test"
 
 sync:
 > uv sync --all-groups
@@ -36,6 +37,9 @@ data:
 
 validate:
 > $(PYTHON) -m src.data.validate
+
+clean-data:
+> $(PYTHON) -m src.data.clean
 
 clean:
 > rm -rf .pytest_cache .ruff_cache .coverage htmlcov
