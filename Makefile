@@ -1,6 +1,6 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean-data features train-baseline clean all
+.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
@@ -17,6 +17,7 @@ help:
 > @echo "  clean-data      Build data/processed/clean.parquet"
 > @echo "  features        Build data/features/{train,val,test}.parquet"
 > @echo "  train-baseline  Train XGBoost + LightGBM baselines"
+> @echo "  tune-xgb        Optuna tuning for XGBoost (20 trials)"
 > @echo "  clean           Remove caches and build artifacts"
 > @echo "  all             lint + test"
 
@@ -48,6 +49,9 @@ features:
 
 train-baseline:
 > $(PYTHON) -m src.models.train_baseline
+
+tune-xgb:
+> $(PYTHON) -m src.models.tune_optuna --n-trials 20
 
 clean:
 > rm -rf .pytest_cache .ruff_cache .coverage htmlcov
