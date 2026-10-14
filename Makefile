@@ -1,6 +1,6 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean-data clean all
+.PHONY: help sync lint format test data validate clean-data features clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
@@ -15,6 +15,7 @@ help:
 > @echo "  data        Download raw dataset (UCI, fallback Kaggle)"
 > @echo "  validate    Validate raw dataset schema"
 > @echo "  clean-data  Build data/processed/clean.parquet"
+> @echo "  features    Build data/features/{train,val,test}.parquet"
 > @echo "  clean       Remove caches and build artifacts"
 > @echo "  all         lint + test"
 
@@ -40,6 +41,9 @@ validate:
 
 clean-data:
 > $(PYTHON) -m src.data.clean
+
+features:
+> $(PYTHON) -m src.features.clinical
 
 clean:
 > rm -rf .pytest_cache .ruff_cache .coverage htmlcov
