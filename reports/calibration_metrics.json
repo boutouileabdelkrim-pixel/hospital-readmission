@@ -1,0 +1,11 @@
+{
+  "brier": {
+    "brier_calibrated": 0.09606384698472337,
+    "brier_delta": 0.11593287133831118,
+    "brier_uncalibrated": 0.21199671832303454
+  },
+  "n_bins": 10,
+  "n_splits": 5,
+  "n_test": 14902,
+  "positives_test": 1697
+}

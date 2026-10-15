@@ -1,0 +1,84 @@
+{
+  "top_features": [
+    {
+      "feature": "number_inpatient",
+      "mean_abs_shap": 0.27840128540992737
+    },
+    {
+      "feature": "discharge_disposition_id",
+      "mean_abs_shap": 0.20153792202472687
+    },
+    {
+      "feature": "age_ord",
+      "mean_abs_shap": 0.059931132942438126
+    },
+    {
+      "feature": "payer_code_Unknown",
+      "mean_abs_shap": 0.05707376077771187
+    },
+    {
+      "feature": "service_utilization",
+      "mean_abs_shap": 0.052040789276361465
+    },
+    {
+      "feature": "num_medications",
+      "mean_abs_shap": 0.05113152787089348
+    },
+    {
+      "feature": "number_diagnoses",
+      "mean_abs_shap": 0.05052253231406212
+    },
+    {
+      "feature": "diag_1_group_Circulatory",
+      "mean_abs_shap": 0.04965796694159508
+    },
+    {
+      "feature": "diabetesMed_No",
+      "mean_abs_shap": 0.04362443462014198
+    },
+    {
+      "feature": "num_lab_procedures",
+      "mean_abs_shap": 0.04073096439242363
+    },
+    {
+      "feature": "time_in_hospital",
+      "mean_abs_shap": 0.036572907119989395
+    },
+    {
+      "feature": "metformin",
+      "mean_abs_shap": 0.035278353840112686
+    },
+    {
+      "feature": "insulin",
+      "mean_abs_shap": 0.029224194586277008
+    },
+    {
+      "feature": "number_emergency",
+      "mean_abs_shap": 0.02808416448533535
+    },
+    {
+      "feature": "medical_specialty_Cardiology",
+      "mean_abs_shap": 0.023991471156477928
+    },
+    {
+      "feature": "admission_source_id",
+      "mean_abs_shap": 0.01965276710689068
+    },
+    {
+      "feature": "A1Cresult_None",
+      "mean_abs_shap": 0.01828324981033802
+    },
+    {
+      "feature": "glimepiride",
+      "mean_abs_shap": 0.01750403828918934
+    },
+    {
+      "feature": "diag_1_group_Diabetes",
+      "mean_abs_shap": 0.016667351126670837
+    },
+    {
+      "feature": "n_med_changes",
+      "mean_abs_shap": 0.015530752949416637
+    }
+  ]
+}
