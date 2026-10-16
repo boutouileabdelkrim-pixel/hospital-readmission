@@ -1,6 +1,6 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb clean all
+.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb mlflow docker-build clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
@@ -18,6 +18,8 @@ help:
 > @echo "  features        Build data/features/{train,val,test}.parquet"
 > @echo "  train-baseline  Train XGBoost + LightGBM baselines"
 > @echo "  tune-xgb        Optuna tuning for XGBoost (20 trials)"
+> @echo "  mlflow          Log trained models to MLflow"
+> @echo "  docker-build    Build the API Docker image"
 > @echo "  clean           Remove caches and build artifacts"
 > @echo "  all             lint + test"
 
@@ -52,6 +54,12 @@ train-baseline:
 
 tune-xgb:
 > $(PYTHON) -m src.models.tune_optuna --n-trials 20
+
+mlflow:
+> $(PYTHON) -m src.models.log_mlflow
+
+docker-build:
+> docker build -f docker/Dockerfile -t hospital-readmission-api:0.1.0 .
 
 clean:
 > rm -rf .pytest_cache .ruff_cache .coverage htmlcov

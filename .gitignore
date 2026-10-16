@@ -112,3 +112,4 @@ docker-compose.override.yml
 # ============================================================
 *.bak
 *.swp
+mlruns.db
