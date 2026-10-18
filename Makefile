@@ -1,6 +1,6 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb mlflow drift docker-build clean all
+.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb mlflow cost-analysis drift docker-build clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
@@ -19,6 +19,7 @@ help:
 > @echo "  train-baseline  Train XGBoost + LightGBM baselines"
 > @echo "  tune-xgb        Optuna tuning for XGBoost (20 trials)"
 > @echo "  mlflow          Log trained models to MLflow"
+> @echo "  cost-analysis   Cost-sensitive threshold analysis"
 > @echo "  drift           Generate Evidently drift report"
 > @echo "  docker-build    Build the API Docker image"
 > @echo "  clean           Remove caches and build artifacts"
@@ -59,8 +60,11 @@ tune-xgb:
 mlflow:
 > $(PYTHON) -m src.models.log_mlflow
 
+cost-analysis:
+> $(PYTHON) -m src.models.cost_analysis
+
 drift:
-> $(PYTHON) -m src.monitoring.drift --sample-size 5000
+> $(PYTHON) -m src.monitoring.drift --sample-size 1000
 
 docker-build:
 > docker build -f docker/Dockerfile -t hospital-readmission-api:0.1.0 .

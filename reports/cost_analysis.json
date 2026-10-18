@@ -1,0 +1,43 @@
+{
+  "computed_at": "2026-10-18T22:55:03.213042+00:00",
+  "cost_assumptions": {
+    "fn_cost_usd": 15000.0,
+    "fp_cost_usd": 500.0
+  },
+  "default_threshold_0p5_on_eval_split": {
+    "at_threshold": {
+      "fn": 735,
+      "fp": 4179,
+      "tn": 9026,
+      "tp": 962
+    },
+    "savings_pct": 46.59006089176979,
+    "savings_usd": 11859500.0,
+    "threshold": 0.5,
+    "total_cost_usd": 13595500.0
+  },
+  "eval_split": "test",
+  "improvement_optimal_vs_default_usd": 3108000.0,
+  "min_precision": 0.15,
+  "optimal_analysis_on_optimal_split": {
+    "at_optimal": {
+      "fn": 420,
+      "fp": 7098,
+      "tn": 6107,
+      "tp": 1277
+    },
+    "baseline_total_cost_usd": 25455000.0,
+    "constraint_applied": true,
+    "cost_per_patient_at_optimal": 703.764595356328,
+    "min_precision_floor": 0.15,
+    "min_total_cost_usd": 10487500.0,
+    "n_positives": 1697,
+    "n_samples": 14902,
+    "optimal_threshold": 0.41000000000000003,
+    "precision_at_optimal": 0.15247761194029852,
+    "savings_pct": 58.79984285994893,
+    "savings_per_1000_patients_usd": 1004395.3831700443,
+    "savings_usd": 14967500.0
+  },
+  "optimal_split": "val"
+}
