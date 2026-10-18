@@ -1,10 +1,11 @@
 # Use '>' as recipe prefix to avoid tab/space issues when pasting.
 .RECIPEPREFIX = >
-.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb mlflow cost-analysis drift docker-build clean all
+.PHONY: help sync lint format test data validate clean-data features train-baseline tune-xgb mlflow cost-analysis drift streamlit docker-build clean all
 
 PYTHON := uv run python
 PYTEST := uv run pytest
 RUFF   := uv run ruff
+STREAMLIT := uv run streamlit
 
 help:
 > @echo "Hospital Readmission — available targets:"
@@ -21,6 +22,7 @@ help:
 > @echo "  mlflow          Log trained models to MLflow"
 > @echo "  cost-analysis   Cost-sensitive threshold analysis"
 > @echo "  drift           Generate Evidently drift report"
+> @echo "  streamlit       Launch the Streamlit dashboard"
 > @echo "  docker-build    Build the API Docker image"
 > @echo "  clean           Remove caches and build artifacts"
 > @echo "  all             lint + test"
@@ -29,12 +31,12 @@ sync:
 > uv sync --all-groups
 
 lint:
-> $(RUFF) check src tests
-> $(RUFF) format --check src tests
+> $(RUFF) check src tests app
+> $(RUFF) format --check src tests app
 
 format:
-> $(RUFF) format src tests
-> $(RUFF) check --fix src tests
+> $(RUFF) format src tests app
+> $(RUFF) check --fix src tests app
 
 test:
 > $(PYTEST) -v
@@ -65,6 +67,9 @@ cost-analysis:
 
 drift:
 > $(PYTHON) -m src.monitoring.drift --sample-size 1000
+
+streamlit:
+> $(STREAMLIT) run app/streamlit_app.py
 
 docker-build:
 > docker build -f docker/Dockerfile -t hospital-readmission-api:0.1.0 .

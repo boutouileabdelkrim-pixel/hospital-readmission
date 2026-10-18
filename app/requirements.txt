@@ -1,0 +1,7 @@
+streamlit>=1.36,<2.0
+pandas>=2.2,<3.0
+numpy>=1.26,<2.0
+pyarrow>=16.0,<20.0
+xgboost>=2.0,<3.0
+shap>=0.45,<1.0
+matplotlib>=3.8,<4.0
